@@ -3,14 +3,12 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 use app\core\Application;
 
-$app = new Application();
+$app = new Application(dirname(__Dir__));
 
-$app->router->get('/', function (){
-    return 'Hello';
-});
+$app->router->get('/', 'home');
 
-$app->router->get('/cijfers', function (){
-    return 'cijfers';
-});
+$app->router->get('/resultaten', 'resultaten');
+
+$app->router->get('/voortgang', 'voortgang');
 
 $app->run();

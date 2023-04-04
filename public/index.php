@@ -15,4 +15,10 @@ $app->router->get('/inschrijven', 'inschrijven');
 
 $app->router->get('/instellingen', 'instellingen');
 
+$app->router->get('/contact', 'contact');
+
+$app->router->post('/contact', function (){
+    return 'submitting data';
+});
+
 $app->run();

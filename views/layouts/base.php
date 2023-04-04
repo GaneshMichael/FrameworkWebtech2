@@ -28,11 +28,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/inschrijven">Inschrijven</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-{{content}}
+
+<div class="container">
+    {{content}}
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </body>
 </html>

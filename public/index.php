@@ -1,11 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
+use app\controllers\mainController;
 use app\core\Application;
 
 $app = new Application(dirname(__Dir__));
 
-$app->router->get('/', 'home');
+$app->router->get('/', [mainController::class, 'home']);
 
 $app->router->get('/resultaten', 'resultaten');
 
@@ -15,10 +17,8 @@ $app->router->get('/inschrijven', 'inschrijven');
 
 $app->router->get('/instellingen', 'instellingen');
 
-$app->router->get('/contact', 'contact');
+$app->router->get('/contact', [mainController::class, 'contact']);
 
-$app->router->post('/contact', function (){
-    return 'submitting data';
-});
+$app->router->post('/contact', [mainController::class, 'handleContact']);
 
 $app->run();

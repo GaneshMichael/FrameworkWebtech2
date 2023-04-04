@@ -1,18 +1,19 @@
 <?php
 
 namespace app\controllers;
-use app\core\Application;
 
-class siteController
+use app\core\Controller;
+
+class mainController extends Controller
 {
     public function home() {
         $params = [
             'naam' => 'Michael'
         ];
-        return Application::$app->router->renderView('home', $params);
+        return $this->render('home', $params);
     }
     public function contact() {
-        return Application::$app->router->renderView('contact');
+        return $this->render('contact');
     }
     public function handleContact() {
         return 'Submitting data';

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Framework webtech</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 </head>
 <body>
@@ -21,6 +21,13 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/voortgang">Voortgang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/instellingen">Instellingen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/inschrijven">Inschrijven</a>
+                </li>
             </ul>
         </div>
     </div>

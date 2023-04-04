@@ -13,4 +13,6 @@ $app->router->get('/voortgang', 'voortgang');
 
 $app->router->get('/inschrijven', 'inschrijven');
 
+$app->router->get('/instellingen', 'instellingen');
+
 $app->run();

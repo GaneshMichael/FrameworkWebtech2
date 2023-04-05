@@ -4,19 +4,19 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use app\controllers\AuthenticationController;
 use app\controllers\mainController;
-use app\core\Application;
+use app\core\App;
 
-$app = new Application(dirname(__Dir__));
+$app = new App(dirname(__Dir__));
 
 $app->router->get('/', [mainController::class, 'home']);
 
-$app->router->get('/resultaten', 'resultaten');
+$app->router->get('/resultaten', [mainController::class, 'resultaten']);
 
-$app->router->get('/voortgang', 'voortgang');
+$app->router->get('/voortgang', [mainController::class, 'voortgang']);
 
-$app->router->get('/inschrijven', 'inschrijven');
+$app->router->get('/inschrijven', [mainController::class, 'inschrijven']);
 
-$app->router->get('/instellingen', 'instellingen');
+$app->router->get('/instellingen', [mainController::class, 'instellingen']);
 
 $app->router->get('/contact', [mainController::class, 'contact']);
 

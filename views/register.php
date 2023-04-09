@@ -1,17 +1,20 @@
 <h1> Create an account </h1>
+<?php
+
+?>
 
 <form action="" method="post">
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label>Voornaam</label>
-                <input type="text" name ="voornaam" class="form-control">
+                <label>Firstname</label>
+                <input type="text" name ="firstname" class="form-control">
             </div>
         </div>
         <div class="col">
             <div class="form-group">
-                <label>Achternaam</label>
-                <input type="text" name ="achternaam" class="form-control">
+                <label>Lastname</label>
+                <input type="text" name ="lastname" class="form-control">
             </div>
         </div>
     </div>
@@ -24,8 +27,8 @@
         <input type="password" name ="Password" class="form-control">
     </div>
     <div class="form-group">
-        <label>Repeat Password</label>
-        <input type="password" name ="repeatPassword" class="form-control">
+        <label>Confirm Password</label>
+        <input type="password" name ="confirmPassword" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

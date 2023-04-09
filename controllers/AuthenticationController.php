@@ -16,19 +16,27 @@ class AuthenticationController extends Controller
 
     public function register(Request $request): false|array|string
     {
-        $errors =[];
+        $registerModel = new RegisterModel();
+
         if($request->isPost()){
-            $registerModel = new RegisterModel();
-            $firstname = $request->getBody()['firstname'];
-            if (!$firstname){
-                $errors['firstname'] = 'This field is required';
+            $registerModel->loadData($request->getBody());
+
+            echo '<pre>';
+            var_dump($registerModel);
+            echo '</pre>';
+
+            if ($registerModel -> validate() && $registerModel->register()) {
+                return 'Success!';
             }
-            return 'Submitting data';
+
+            return $this->render('register', [
+                'model' =>$registerModel
+            ]);
         }
 
         $this->chooseLayout('authentication');
         return $this->render('register', [
-            'errors' => $errors
+            'model' =>$registerModel
         ]);
     }
 }

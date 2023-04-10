@@ -17,6 +17,11 @@ class mainController extends Controller
     public function contact() {
         return $this->render('contact');
     }
+
+    public function voortgang() {
+        return $this->render('voortgang');
+    }
+
     public function handleContact(Request $request) {
         $body = $request->getBody();
         echo '<pre>';

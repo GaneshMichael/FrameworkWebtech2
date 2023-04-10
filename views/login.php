@@ -2,7 +2,7 @@
 
 <form action="" method="post">
     <div class="form-group">
-        <label>Subject</label>
+        <label>Email</label>
         <input type="text" name ="Email" class="form-control">
         <div class="form-text"></div>
     </div>
@@ -10,5 +10,5 @@
         <label>Password</label>
         <input type="password" name ="password" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Inloggen</button>
 </form>

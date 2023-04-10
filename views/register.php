@@ -30,5 +30,5 @@
         <label>Confirm Password</label>
         <input type="password" name ="confirmPassword" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Create account</button>
 </form>

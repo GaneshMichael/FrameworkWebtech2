@@ -76,4 +76,13 @@ abstract class Model
             ];
     }
 
+    public function hasError($attribute)
+    {
+        return $this->errors[$attribute] ?? false;
+    }
+
+    public function getFirsterror($attribute)
+    {
+        return $this->errors[$attribute][0] ?? false;
+    }
 }

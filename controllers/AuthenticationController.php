@@ -21,13 +21,13 @@ class AuthenticationController extends Controller
         if($request->isPost()){
             $registerModel->loadData($request->getBody());
 
-            echo '<pre>';
-            var_dump($registerModel);
-            echo '</pre>';
-
             if ($registerModel -> validate() && $registerModel->register()) {
                 return 'Success!';
             }
+
+            echo '<pre>';
+            var_dump($registerModel->errors);
+            echo '</pre>';
 
             return $this->render('register', [
                 'model' =>$registerModel

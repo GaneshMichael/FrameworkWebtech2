@@ -8,13 +8,11 @@ class Database
 {
     public PDO $pdo;
 
-    public function __construct(array $config)
+    public function __construct()
     {
-        $dsn = $config['dsn'] ?? '';
-        $user = $config['user'] ?? '';
-        $password = $config['password'] ?? '';
-
-        $this->pdo = new PDO($dsn, $user, $password);
+        $user = 'u125010p150230_framework';
+        $pass = 'm5VPhml6VF';
+        $this->pdo = new PDO('mysql:host=web0155.zxcs.nl;port=3306;dbname=u125010p150230_framework', $user, $pass);;
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -24,7 +22,7 @@ class Database
         $appliedMigrations = $this->getAppliedMigrations();
 
         $newMigrations = [];
-        $files = scandir(App::$ROOT_DIR,'/migrations');
+        $files = scandir(App::$ROOT_DIR.'/migrations');
         $toApplyMigrations = array_diff($files, $appliedMigrations);
         foreach ($toApplyMigrations as $migration) {
             if ($migration === '.' || $migration === '..') {
@@ -50,7 +48,7 @@ class Database
     public function createMigrationsTable()
     {
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations(  
-            id INT AUTO_INCREMENT PRIMARY_KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             migration VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ) ENGINE=INNODB;");

@@ -6,7 +6,7 @@ use app\core\App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new App(dirname(__Dir__));
+$app = new App(dirname(__DIR__));
 
 $app->router->get('/', [mainController::class, 'home']);
 

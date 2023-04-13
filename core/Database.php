@@ -31,7 +31,7 @@ class Database
 
             require_once App::$ROOT_DIR.'/migrations/'.$migration;
             $className = pathinfo($migration, PATHINFO_FILENAME);
-            $instance = new $className;
+            $instance = new $className();
             $this->log("Applying migration $migration");
             $instance->up();
             $this->log("Applied migration $migration");
@@ -70,6 +70,11 @@ class Database
               ");
         $statement->execute();
     }
+
+//    public function prepare($sql)
+//    {
+//        return $this->pdo->prepare($sql);
+//    }
 
     protected function log($message)
     {

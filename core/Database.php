@@ -23,6 +23,7 @@ class Database
 
         $newMigrations = [];
         $files = scandir(App::$ROOT_DIR.'/migrations');
+        var_dump($files);
         $toApplyMigrations = array_diff($files, $appliedMigrations);
         foreach ($toApplyMigrations as $migration) {
             if ($migration === '.' || $migration === '..') {
@@ -31,7 +32,7 @@ class Database
 
             require_once App::$ROOT_DIR.'/migrations/'.$migration;
             $className = pathinfo($migration, PATHINFO_FILENAME);
-            $instance = new $className();
+            $instance = new $className;
             $this->log("Applying migration $migration");
             $instance->up();
             $this->log("Applied migration $migration");
@@ -47,7 +48,7 @@ class Database
 
     public function createMigrationsTable()
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations(  
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations (  
             id INT AUTO_INCREMENT PRIMARY KEY,
             migration VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -59,13 +60,13 @@ class Database
         $statement = $this->pdo->prepare("SELECT migration FROM migrations");
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_COLUMN);
+        return $statement->fetchAll(\PDO::FETCH_COLUMN);
     }
 
     public function saveMigrations(array $migrations)
     {
         $str = implode(",", array_map(fn($m) => "('$m')", $migrations ));
-        $statement = $this->pdo->prepare("INSERT INTO migrations(migration) VALUES  
+        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES  
               $str          
               ");
         $statement->execute();

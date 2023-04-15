@@ -1,14 +1,16 @@
-<h1> Log in </h1>
+<h1> Create an account </h1>
 
-<form action="" method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" name ="Email" class="form-control">
-        <div class="form-text"></div>
+<?php $form =  \app\core\form\Form::begin('', "post") ?>
+<div class="row">
+    <div class="col">
+        <?php echo $form->field($model, 'firstname') ?>
     </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" name ="password" class="form-control">
+    <div class="col">
+        <?php echo $form->field($model, 'lastname') ?>
     </div>
-    <button type="submit" class="btn btn-primary">Inloggen</button>
-</form>
+</div>
+<?php echo $form->field($model, 'email') ?>
+<?php echo $form->field($model, 'Password')->passwordField() ?>
+
+<button type="submit" class="btn btn-primary">Inloggen</button>
+<?php  \app\core\form\Form::end() ?>

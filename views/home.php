@@ -1,3 +1,9 @@
-<h1> Home </h1>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+</body>
 
-<h3>Welkom <?php echo $naam ?></h3>
+</html>

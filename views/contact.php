@@ -1,6 +1,12 @@
-<h1> Contact </h1>
-
-<form action="" method="post">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+</head>
+<body>
+    <h1>Contact</h1>
+    <p>Send us a message</p>
+    <form action="" method="post">
     <div class="form-group">
         <label>Subject</label>
         <input type="text" name ="subject" class="form-control">
@@ -15,3 +21,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</body>
+</html>

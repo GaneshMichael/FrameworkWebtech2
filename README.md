@@ -4,7 +4,6 @@
 1. [About](#About)
 2. [Installation](#installation)
 3. [Usage](#usage)
-4. 
 
 ## About <a name="About"></a>
 Een simpele php framework voor webtech 2
@@ -19,7 +18,7 @@ Een simpele php framework voor webtech 2
 7. Done!
 
 ## Usage <a name="usage"></a>
-| Userid | Email                    | Role    
+| Userid | Email                    | Role    |
 |--------|--------------------------|---------|
 | 1      | m.a.s.ganesh@st.hanze.nl | Student |
 |        |                          | Teacher |

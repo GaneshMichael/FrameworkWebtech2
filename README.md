@@ -1,6 +1,6 @@
-                    # webtech 2 backend
+# webtech 2 backend
 
-#### Table of Contents
+### Table of Contents
 1. [About](#About)
 2. [Installation](#installation)
 3. [Usage](#usage)
@@ -21,5 +21,5 @@ Een simpele php framework voor webtech 2
 | Userid | Email                    | Role    |
 |--------|--------------------------|---------|
 | 1      | m.a.s.ganesh@st.hanze.nl | Student |
-|        |                          | Teacher |
-|        |                          | Admin   |
+| 2      |                          | Teacher |
+| 3      |                          | Admin   |

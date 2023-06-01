@@ -1,6 +1,6 @@
 <?php
 
-namespace app\EventDispatcher\Interfaces;
+namespace app\Application\EventDispatcher\Interfaces;
 
 /**
  * Defines a dispatcher for events.

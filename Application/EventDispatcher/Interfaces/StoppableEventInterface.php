@@ -1,6 +1,6 @@
 <?php
 
-namespace app\EventDispatcher\Interfaces;
+namespace app\Application\EventDispatcher\Interfaces;
 
 /**
  * An Event whose processing may be interrupted when the event has been handled.

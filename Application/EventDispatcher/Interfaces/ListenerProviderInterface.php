@@ -1,6 +1,6 @@
 <?php
 
-namespace app\EventDispatcher\Interfaces;
+namespace app\Application\EventDispatcher\Interfaces;
 
 /**
  * Mapper from an event to the listeners that are applicable to that event.

@@ -13,5 +13,8 @@
         <label>Body</label>
         <textarea name ="body" class="form-control"></textarea>
     </div>
+    <div class="form-group">
+        <label>Attachment</label>
+        <input type="file" name ="attachment" class="form-control">
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

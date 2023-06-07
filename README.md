@@ -6,7 +6,7 @@
 3. [Usage](#usage)
 
 ## About <a name="About"></a>
-Een simpele php framework voor gemaakt voor het vak webtechnologie 2.
+Een simpele php framework gemaakt voor het vak webtechnologie 2.
 
 ## Installation <a name="installation"></a>
 1. Clone de repository

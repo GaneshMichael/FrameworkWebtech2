@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use app\Database\Database;
+
 class App {
 
     public static string$ROOT_DIR;

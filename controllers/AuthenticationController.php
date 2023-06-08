@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\Request;
-use app\models\RegisterModel;
+use app\Models\RegisterModel;
 
 class AuthenticationController extends Controller
 {

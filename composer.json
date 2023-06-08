@@ -1,0 +1,18 @@
+{
+    "name": "michael/framework-webtech2",
+    "description": "School Project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Michael Ganesh",
+            "email": "m.a.s.ganesh@st.hanze.nl"
+        }
+    ],
+    "require": {
+      "ext-pdo": "*"
+    }
+}

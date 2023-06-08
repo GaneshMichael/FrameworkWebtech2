@@ -22,11 +22,13 @@ class mainController extends Controller
         return $this->render('voortgang');
     }
 
+    public function resultaten() {
+        return $this->render('resultaten');
+    }
+
     public function handleContact(Request $request) {
         $body = $request->getBody();
-        echo '<pre>';
-        var_dump($body);
-        echo '</pre>';
+
         return 'Submitting data';
     }
 

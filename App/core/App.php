@@ -1,8 +1,8 @@
 <?php
 
-namespace app\core;
+namespace app\App\core;
 
-use app\Database\Database;
+use app\App\core\Database;
 
 class App {
 
@@ -23,7 +23,6 @@ class App {
         $this ->response = new Response();
         $this ->router = new Router($this->request, $this->response);
 
-        $this->db = new Database();
     }
 
     public function run() {

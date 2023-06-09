@@ -1,7 +1,8 @@
 <?php
-use app\controllers\AuthenticationController;
-use app\controllers\mainController;
 
+use app\App\controllers\AuthenticationController;
+use app\App\controllers\mainController;
+use app\App\core\Application;
 $app->router->get('/', [mainController::class, 'home']);
 $app->router->get('/resultaten', [mainController::class, 'resultaten']);
 $app->router->get('/voortgang', [mainController::class, 'voortgang']);

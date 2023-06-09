@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\App\controllers;
 
-use app\core\Controller;
-use app\core\Request;
-use app\Models\RegisterModel;
+use app\App\core\Controller;
+use app\App\core\Request;
+use app\App\Models\RegisterModel;
 
 class AuthenticationController extends Controller
 {

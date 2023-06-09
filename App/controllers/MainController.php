@@ -1,10 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\App\controllers;
 
-use app\core\App;
-use app\core\Controller;
-use app\core\Request;
+use app\App\core\Controller;
+use app\App\core\Request;
 
 class mainController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\core;
+namespace app\App\core;
 
 class Router {
     protected array $routes = [];
@@ -59,7 +59,7 @@ class Router {
     {
         $layout = App::$app->controller->layout;
         ob_start();
-        include_once App::$ROOT_DIR."/views/Layouts/$layout.php";
+        include_once App::$ROOT_DIR."/Views/Layouts/$layout.php";
         return ob_get_clean();
     }
 
@@ -69,7 +69,7 @@ class Router {
             $$key = $value;
         }
         ob_start();
-        include_once App::$ROOT_DIR."/views/$view.php";
+        include_once App::$ROOT_DIR."/Views/$view.php";
         return ob_get_clean();
     }
 }

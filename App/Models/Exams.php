@@ -11,14 +11,34 @@ class Exams {
     }
 
     public function getAllExams() {
-        $query = "SELECT * FROM exams";
+        $query = "SELECT * FROM Exams";
         return $this->db->query($query);
     }
 
+
     public function createExam($name, $teacherId) {
-        $query = "INSERT INTO exams (ID, name, teacher_ID) VALUES (?, ?, ?)";
-        $values = [$name, $teacherId];
+        $query = "INSERT INTO Exams (ID, name, teacher_ID) VALUES (:ID, :name, :teacherId)";
+        $values = [
+            'name' => $name,
+            'teacherId' => $teacherId
+        ];
         return $this->db->execute($query, $values);
     }
 
+
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+    }
 }
+
+
+

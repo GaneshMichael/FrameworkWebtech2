@@ -11,12 +11,12 @@ class Student {
     }
 
     public function getAllStudents() {
-        $query = "SELECT * FROM student";
+        $query = "SELECT * FROM Student";
         return $this->db->query($query);
     }
 
     public function createStudent($voornaam, $achternaam, $leeftijd, $opleidingsnaam) {
-        $query = "INSERT INTO student (Voornaam, Achternaam, Leeftijd, Opleidingsnaam) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO Student (Voornaam, Achternaam, Leeftijd, Opleidingsnaam) VALUES (?, ?, ?, ?)";
         $values = [$voornaam, $achternaam, $leeftijd, $opleidingsnaam];
         return $this->db->execute($query, $values);
     }

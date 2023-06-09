@@ -1,6 +1,7 @@
 <?php
 
 require_once 'database.php';
+use app\App\core\Database;
 
 $db = new Database();
 $db->connect();

@@ -59,7 +59,7 @@ class Router {
     {
         $layout = App::$app->controller->layout;
         ob_start();
-        include_once App::$ROOT_DIR."/views/layouts/$layout.php";
+        include_once App::$ROOT_DIR."/views/Layouts/$layout.php";
         return ob_get_clean();
     }
 

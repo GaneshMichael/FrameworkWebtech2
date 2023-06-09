@@ -23,5 +23,5 @@ CREATE TABLE Exams (
                            ID INT PRIMARY KEY AUTO_INCREMENT,
                            naam VARCHAR(255) NOT NULL,
                            teacher_ID INT NOT NULL
-);
+);;
 

@@ -47,4 +47,12 @@ class Database {
             die('Database connection failed: ' . $e->getMessage());
         }
     }
+
+    public function executeStatements($sqlStatements) {
+        try {
+            $this->connection->exec($sqlStatements);
+        } catch (PDOException $e) {
+            die('Error executing SQL statements: ' . $e->getMessage());
+        }
+    }
 }

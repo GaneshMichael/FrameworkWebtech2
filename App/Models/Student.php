@@ -21,5 +21,4 @@ class Student {
         return $this->db->execute($query, $values);
     }
 
-    // Andere methoden voor het bijwerken, verwijderen, enz. van studenten
 }

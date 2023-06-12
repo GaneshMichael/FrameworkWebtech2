@@ -11,8 +11,8 @@ Een simpele php framework voor webtech 2
 ## Installation <a name="installation"></a>
 1. Clone de repository
 2. Run `composer install`
-3. Run `php -S localhost:8000 -t public`
-4. Open `localhost:8000` in je browser
+3. Run `php -S localhost:8080`
+4. Open `localhost:8080` in je browser
 5. Done!
 
 ## Usage <a name="usage"></a>

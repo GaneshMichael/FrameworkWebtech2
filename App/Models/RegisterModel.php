@@ -9,7 +9,8 @@ use app\App\core\Model;
 class RegisterModel extends Model
 {
     protected $db;
-    public string $username = '';
+    public string $firstName = '';
+    public string $lastName = '';
     public string $password = '';
     public string $email = '';
     public string $confirmPassword = '';

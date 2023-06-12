@@ -10,9 +10,19 @@ echo $form->begin('/register', 'post');
 ?>
 
 <div class="mb-3 row">
-    <label for="username" class="col-sm-2 col-form-label">Username</label>
+    <label for="username" class="col-sm-2 col-form-label">First name</label>
     <div class="col-sm-10">
-        <?php echo $form->field($model, 'username')->textInput(); ?>
+        <?php echo $form->field($model, 'firstName')->textInput(); ?>
+    </div>
+    <label for="username" class="col-sm-2 col-form-label">Last name</label>
+<div class="col-sm-10">
+    <?php echo $form->field($model, 'lastName')->textInput(); ?>
+</div>
+
+<div class="mb-3 row">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+        <?php echo $form->field($model, 'email')->emailInput(); ?>
     </div>
 </div>
 
@@ -20,13 +30,6 @@ echo $form->begin('/register', 'post');
     <label for="password" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
         <?php echo $form->field($model, 'password')->passwordInput(); ?>
-    </div>
-</div>
-
-<div class="mb-3 row">
-    <label for="email" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-        <?php echo $form->field($model, 'email')->emailInput(); ?>
     </div>
 </div>
 

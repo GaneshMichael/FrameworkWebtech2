@@ -3,11 +3,16 @@
 namespace app\App\Models;
 
 use app\App\core\Database;
+use app\App\core\Model;
 
 
-class RegisterModel
+class RegisterModel extends Model
 {
     protected $db;
+    public string $username = '';
+    public string $password = '';
+    public string $email = '';
+    public string $confirmPassword = '';
 
     public function __construct()
     {

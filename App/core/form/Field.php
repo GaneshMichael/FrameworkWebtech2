@@ -1,53 +1,60 @@
 <?php
-
 namespace app\App\core\form;
 
 use app\App\core\Model;
 
 class Field
 {
-    public const TYPE_TEXT = 'text';
-    public const TYPE_PASSWORD = 'password';
-    public const TYPE_NUMBER = 'number';
-    public string $type;
-    public Model $model;
-    public string $attribute;
+public Model $model;
+public string $attribute;
 
-    /**
-     * @param Model $model
-     * @param string $attribute
-     */
-    public function __construct(Model $model, string $attribute)
-    {
-        $this->type = self::TYPE_TEXT;
-        $this->model = $model;
-        $this->attribute = $attribute;
-    }
+public function __construct(Model $model, string $attribute)
+{
+$this->model = $model;
+$this->attribute = $attribute;
+}
 
-    public function __toString()
+public function __toString(): string
+{
+$value = $this->model->{$this->attribute};
+$error = $this->model->getFirstError($this->attribute);
+
+return sprintf('
+<div class="form-group">
+    <label>%s</label>
+    <input type="text" name="%s" value="%s" class="form-control%s">
+    <div class="invalid-feedback">
+        %s
+    </div>
+</div>
+', $this->attribute, $this->attribute, $value, $error ? ' is-invalid' : '', $error);
+}
+    public function textInput(): string
     {
-        return sprintf('
-             <div class="form-group">
-                <label>%s</label>
-                <input type="%s" name ="%s" value="%s" class="form-control %s">
-                <div class="invalid-feedback">
-                    %s
-                </div>
-            </div>
-        ',
-            $this->attribute,
-            $this->type,
+        return sprintf(
+            '<input type="text" name="%s" value="%s" class="%s">',
             $this->attribute,
             $this->model->{$this->attribute},
-            $this->model->hasError($this->attribute) ? 'is-invalid ' : '',
-            $this->model->getFirstError($this->attribute)
+            $this->model->hasError($this->attribute) ? 'is-invalid' : ''
+        );
+    }
+    public function passwordInput(): string
+    {
+        return sprintf(
+            '<input type="password" name="%s" value="%s" class="%s">',
+            $this->attribute,
+            $this->model->{$this->attribute},
+            $this->model->hasError($this->attribute) ? 'is-invalid' : ''
         );
     }
 
-    public function passwordField(): static
+    public function emailInput(): string
     {
-        $this->type = self::TYPE_PASSWORD;
-        return $this;
+        return sprintf(
+            '<input type="email" name="%s" value="%s" class="%s">',
+            $this->attribute,
+            $this->model->{$this->attribute},
+            $this->model->hasError($this->attribute) ? 'is-invalid' : ''
+        );
     }
-
 }

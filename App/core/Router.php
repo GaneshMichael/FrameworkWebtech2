@@ -1,11 +1,10 @@
 <?php
-
 namespace app\App\core;
 
-class Router {
+class Router
+{
     protected array $routes = [];
     public Request $request;
-
     public Response $response;
 
     public function __construct(Request $request, Response $response)
@@ -13,6 +12,7 @@ class Router {
         $this->request = $request;
         $this->response = $response;
     }
+
     public function get($path, $callback): void
     {
         $this->routes['get'][$path] = $callback;
@@ -25,37 +25,58 @@ class Router {
 
     public function resolve()
     {
-     $path = $this->request->getPath();
-     $method = $this->request->method();
-     $callback = $this->routes[$method][$path] ?? false;
-     if (!$callback) {
-         $this->response->setStatusCode(404);
-         return $this->renderView("_404");
-     }
-     if (is_array($callback)){
-         App::$app->controller = new $callback[0];
-         $callback[0] = App::$app->controller ;
-     }
-     if (is_string($callback)){
-         return $this->renderView($callback);
-     }
-     return call_user_func($callback, $this->request);
+        $path = $this->request->getPath();
+        $method = $this->request->method();
+        $callback = $this->routes[$method][$path] ?? false;
+
+        if (!$callback) {
+            $this->response->setStatusCode(404);
+            return $this->renderView("_404");
+        }
+
+        // Toevoegen van autorisatiemiddleware
+        $authorized = $this->applyAuthorizationMiddleware();
+        if (!$authorized) {
+            $this->response->setStatusCode(401);
+            return $this->renderView("_401");
+        }
+
+        if (is_array($callback)) {
+            App::$app->controller = new $callback[0];
+            $callback[0] = App::$app->controller;
+        }
+
+        if (is_string($callback)) {
+            return $this->renderView($callback);
+        }
+
+        return call_user_func($callback, $this->request);
     }
 
-    public function renderView($view, $params = []): array|false|string
+    protected function applyAuthorizationMiddleware(): bool
+    {
+        // Controleer hier of de gebruiker geautoriseerd is
+        // Implementeer de logica van je autorisatiemiddleware
+        // Retourneer true als de gebruiker geautoriseerd is, anders false
+
+        // Voorbeeldimplementatie:
+        // Als je een aparte AuthorizationMiddleware-klasse hebt, kun je deze hier aanroepen
+        // $middleware = new AuthorizationMiddleware();
+        // return $middleware->handle($this->request);
+
+        // Als je de autorisatielogica rechtstreeks in de Router wilt implementeren, kun je het hier doen
+        // Retourneer true als de gebruiker geautoriseerd is, anders false
+        return true;
+    }
+
+    public function renderView($view, $params = [])
     {
         $layoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    public function renderContent($viewContent): array|false|string
-    {
-        $layoutContent = $this->layoutContent();
-        return str_replace('{{content}}', $viewContent, $layoutContent);
-    }
-
-    protected function layoutContent(): false|string
+    protected function layoutContent()
     {
         $layout = App::$app->controller->layout;
         ob_start();
@@ -63,7 +84,7 @@ class Router {
         return ob_get_clean();
     }
 
-    protected function renderOnlyView($view, $params): false|string
+    protected function renderOnlyView($view, $params)
     {
         foreach ($params as $key => $value) {
             $$key = $value;

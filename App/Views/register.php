@@ -1,17 +1,24 @@
-<h1> Create an account </h1>
+<?php
 
-<?php $form =  \app\App\core\form\Form::begin('', "post") ?>
+use app\App\core\form\Form;
+use app\App\core\form\Field;
+use app\App\Models\RegisterModel;
+
+?>
+
+<h1>Create an account</h1>
+
+<?php $form = Form::begin('', "post") ?>
 <div class="row">
     <div class="col">
-        <?php echo $form->field($model, 'firstname') ?>
+        <?php echo $form->field(new RegisterModel(), 'username')->textInput() ?>
     </div>
     <div class="col">
-        <?php echo $form->field($model, 'lastname') ?>
+        <?php echo $form->field(new RegisterModel(), 'password')->passwordField() ?>
     </div>
 </div>
-<?php echo $form->field($model, 'email') ?>
-<?php echo $form->field($model, 'Password')->passwordField() ?>
-<?php echo $form->field($model, 'confirmPassword')->passwordField() ?>
+<?php echo $form->field(new RegisterModel(), 'email')->textInput(['type' => 'email']) ?>
+<?php echo $form->field(new RegisterModel(), 'confirmPassword')->passwordField() ?>
 
 <button type="submit" class="btn btn-primary">Create account</button>
-<?php  \app\App\core\form\Form::end() ?>
+<?php Form::end() ?>

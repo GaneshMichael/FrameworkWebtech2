@@ -48,6 +48,38 @@ class Database {
         }
     }
 
+    public function count($table, $condition = '', $params = [])
+    {
+        try {
+            $sql = "SELECT COUNT(*) FROM $table";
+            if (!empty($condition)) {
+                $sql .= " WHERE $condition";
+            }
+
+            $statement = $this->connection->prepare($sql);
+            $statement->execute($params);
+
+            return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            die('Error executing database query: ' . $e->getMessage());
+        }
+    }
+    public function insert($table, $columns, $values)
+    {
+        try {
+            $columnString = implode(', ', $columns);
+            $valuePlaceholder = implode(', ', array_fill(0, count($values), '?'));
+
+            $sql = "INSERT INTO $table ($columnString) VALUES ($valuePlaceholder)";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute($values);
+
+            return $this->getLastInsertId();
+        } catch (PDOException $e) {
+            die('Execution failed: ' . $e->getMessage());
+        }
+    }
+
     public function executeStatements($sqlStatements) {
         try {
             $this->connection->exec($sqlStatements);
@@ -81,6 +113,15 @@ class Database {
     public function getLastInsertId()
     {
         return $this->connection->lastInsertId();
+    }
+
+    public function prepare($query)
+    {
+        try {
+            return $this->connection->prepare($query);
+        } catch (PDOException $e) {
+            die('Error preparing database query: ' . $e->getMessage());
+        }
     }
 
 }

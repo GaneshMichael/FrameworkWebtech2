@@ -15,4 +15,6 @@ $app->router->get('/login', [AuthenticationController::class, 'login']);
 $app->router->post('/login', [AuthenticationController::class, 'login']);
 $app->router->get('/register', [AuthenticationController::class, 'register']);
 $app->router->post('/register', [AuthenticationController::class, 'register']);
+$app->router->get('/logout', [AuthenticationController::class, 'logout']);
+$app->router->get('/dashboard', [\app\App\controllers\DashboardController::class, 'dashboard']);
 

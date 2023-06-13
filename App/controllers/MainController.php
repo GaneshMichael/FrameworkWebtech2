@@ -5,14 +5,8 @@ namespace app\App\controllers;
 use app\App\core\Controller;
 use app\App\core\Request;
 
-class mainController extends Controller
+class MainController extends Controller
 {
-    public function home() {
-        $params = [
-            'naam' => 'Michael'
-        ];
-        return $this->render('home', $params);
-    }
     public function contact() {
         return $this->render('contact');
     }

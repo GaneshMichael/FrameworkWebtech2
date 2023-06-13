@@ -12,14 +12,6 @@ class Users
         $this->db->connect();
     }
 
-    public function createUser($firstName, $lastName, $password, $accountType) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $query = "INSERT INTO users (first_name, last_name, password, account_type) VALUES (?, ?, ?, ?)";
-        $values = [$firstName, $lastName, $hashedPassword, $accountType];
-        return $this->db->execute($query, $values);
-    }
-
     public function checkCredentials($firstName, $password) {
         $query = "SELECT * FROM users WHERE first_name = ?";
         $values = [$firstName];

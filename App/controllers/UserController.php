@@ -11,31 +11,6 @@ class UserController {
         $this->userModel = new Users();
     }
 
-    public function register() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Verkrijg de ingediende gegevens van het registratieformulier
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $accountType = $_POST['account_type'];
-
-            // Valideer de ingediende gegevens (bijv. controleer of velden zijn ingevuld, wachtwoordcomplexiteit, etc.)
-
-            // Maak de nieuwe gebruiker aan
-            $result = $this->userModel->createUser($username, $password, $accountType);
-
-            if ($result) {
-                // Registratie succesvol
-                // Redirect naar een succespagina of stuur een bevestigingsmail, etc.
-            } else {
-                // Registratie mislukt
-                // Toon een foutmelding aan de gebruiker
-            }
-        } else {
-            // Toon het registratieformulier
-            // Dit kan worden gedaan via een aparte view-template of door direct HTML uit te voeren
-        }
-    }
-
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verkrijg de ingediende gegevens van het inlogformulier

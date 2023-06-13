@@ -42,6 +42,50 @@ class RegisterModel extends Model
         } else {
             return false;
         }
+
+    }
+
+    public function validate(): bool
+    {
+        $isValid = true;
+
+        // Validate first name
+        if (empty($this->firstName)) {
+            $this->addError('firstName', 'First name is required.');
+            $isValid = false;
+        }
+
+        // Validate last name
+        if (empty($this->lastName)) {
+            $this->addError('lastName', 'Last name is required.');
+            $isValid = false;
+        }
+
+        // Validate email
+        if (empty($this->email)) {
+            $this->addError('email', 'Email is required.');
+            $isValid = false;
+        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $this->addError('email', 'Invalid email format.');
+            $isValid = false;
+        }
+
+        // Validate password
+        if (empty($this->password)) {
+            $this->addError('password', 'Password is required.');
+            $isValid = false;
+        }
+
+        // Validate confirm password
+        if (empty($this->confirmPassword)) {
+            $this->addError('confirmPassword', 'Confirm password is required.');
+            $isValid = false;
+        } elseif ($this->password !== $this->confirmPassword) {
+            $this->addError('confirmPassword', 'Passwords do not match.');
+            $isValid = false;
+        }
+
+        return $isValid;
     }
 
 

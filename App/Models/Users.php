@@ -12,7 +12,7 @@ class Users
         $this->db->connect();
     }
 
-    public function checkCredentials($firstName, $password) {
+    public function checkCredentials($firstName, $password) { // checkCredentials is a method that checks if the user exists in the database
         $query = "SELECT * FROM users WHERE first_name = ?";
         $values = [$firstName];
         $result = $this->db->query($query, $values);
@@ -20,8 +20,6 @@ class Users
         if ($result && password_verify($password, $result['password'])) {
             return $result;
         }
-
         return null;
     }
-
 }

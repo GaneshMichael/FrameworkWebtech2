@@ -15,7 +15,6 @@ class Exams {
         return $this->db->query($query);
     }
 
-
     public function createExam($name, $teacherId) {
         $query = "INSERT INTO Exams (ID, name, teacher_ID) VALUES (:ID, :name, :teacherId)";
         $values = [
@@ -24,8 +23,6 @@ class Exams {
         ];
         return $this->db->execute($query, $values);
     }
-
-
 
     public function __get($property) {
         if (property_exists($this, $property)) {

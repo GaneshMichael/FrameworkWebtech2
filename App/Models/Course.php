@@ -23,7 +23,6 @@ class Course {
         return $this->db->execute($query, $values);
     }
 
-    // Andere methoden voor het bijwerken, verwijderen, enz. van cursussen
 
     public function getCourseById($id) {
         $query = "SELECT * FROM course WHERE id = ?";

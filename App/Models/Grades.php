@@ -72,8 +72,6 @@ class Grades {
         return $this->db->execute($query, $values);
     }
 
-    // Andere methoden voor het ophalen, bijwerken en verwijderen van cijfers
-
     public function __get($property) {
         if (property_exists($this, $property)) {
             return $this->$property;

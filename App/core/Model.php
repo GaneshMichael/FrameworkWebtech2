@@ -18,7 +18,6 @@ class Model
 
     public function validate(): bool
     {
-        // Implementeer hier je validatielogica
         return empty($this->errors);
     }
 

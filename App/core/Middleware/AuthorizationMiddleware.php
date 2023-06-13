@@ -3,14 +3,14 @@
 namespace app\App\Middleware;
 
 use app\App\core\App;
-use app\App\Models\UserModel;
+use app\App\Models\Users;
 
 class AuthorizationMiddleware
 {
     public function handle($request, $next)
     {
         // Controleer of de gebruiker is geautoriseerd
-        if (!UserModel::isLoggedIn()) {
+        if (!Users::isLoggedIn()) {
             // Gebruiker is niet ingelogd, stuur ze naar de inlogpagina
             header('Location: /login');
             exit;

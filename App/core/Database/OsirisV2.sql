@@ -36,3 +36,15 @@ CREATE TABLE Grades (
                             FOREIGN KEY (student_ID) REFERENCES Student(id),
                             FOREIGN KEY (exam_ID) REFERENCES Exams(id)
 );;
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+                       id INT AUTO_INCREMENT PRIMARY KEY,
+                       first_name VARCHAR(50) NOT NULL,
+                       last_name VARCHAR(50) NOT NULL,
+                       email VARCHAR(255) NOT NULL,
+                       password VARCHAR(255) NOT NULL,
+                       account_type VARCHAR(50) NOT NULL
+);
+

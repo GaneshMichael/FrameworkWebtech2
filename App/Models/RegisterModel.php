@@ -5,7 +5,6 @@ namespace app\App\Models;
 use app\App\core\Database;
 use app\App\core\Model;
 
-
 class RegisterModel extends Model
 {
     protected $db;
@@ -23,19 +22,19 @@ class RegisterModel extends Model
 
     public function register()
     {
-        // Controleer of de gebruiker al bestaat
+        // Check if the user already exists
         if ($this->userExists($this->firstName, $this->lastName, $this->email)) {
             return false;
         }
 
-        // Genereer een wachtwoordhash
+        // Generate a password hash
         $passwordHash = password_hash($this->password, PASSWORD_DEFAULT);
 
-        // Voer de databasequery uit om een nieuwe gebruiker aan te maken
-        $query = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        $result = $this->db->execute($query, [$this->username, $passwordHash, $this->email]);
+        // Execute the database query to create a new user
+        $query = "INSERT INTO users (first_name, last_name, password, email) VALUES (?, ?, ?, ?)";
+        $result = $this->db->execute($query, [$this->firstName, $this->lastName, $passwordHash, $this->email]);
 
-        // Return het resultaat van de databasequery (bijv. het ingevoegde gebruikers-ID)
+        // Return the result of the database query (e.g., the inserted user ID)
         if ($result) {
             return $this->db->getLastInsertId();
         } else {
@@ -43,21 +42,21 @@ class RegisterModel extends Model
         }
     }
 
-    public function registerUser($username, $password, $email)
+    public function registerUser($firstName, $lastName, $password, $email)
     {
-        // Controleer of de gebruiker al bestaat
-        if ($this->userExists($username, $email)) {
+        // Check if the user already exists
+        if ($this->userExists($firstName, $lastName, $email)) {
             return false;
         }
 
-        // Genereer een wachtwoordhash
+        // Generate a password hash
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        // Voer de databasequery uit om een nieuwe gebruiker aan te maken
-        $query = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        $result = $this->db->execute($query, [$username, $passwordHash, $email]);
+        // Execute the database query to create a new user
+        $query = "INSERT INTO users (first_name, last_name, password, email) VALUES (?, ?, ?, ?)";
+        $result = $this->db->execute($query, [$firstName, $lastName, $passwordHash, $email]);
 
-        // Return het resultaat van de databasequery (bijv. het ingevoegde gebruikers-ID)
+        // Return the result of the database query (e.g., the inserted user ID)
         if ($result) {
             return $this->db->getLastInsertId();
         } else {
@@ -65,14 +64,14 @@ class RegisterModel extends Model
         }
     }
 
-    public function userExists($firstname, $email)
+    public function userExists($firstName, $lastName, $email)
     {
-        // Controleer of de gebruiker al bestaat op basis van gebruikersnaam of e-mail
-        $query = "SELECT COUNT(*) FROM users WHERE firstname = ? OR email = ?";
-        $result = $this->db->fetchColumn($query, [$firstname, $email]);
+        // Check if the user already exists based on first name, last name, or email
+        $query = "SELECT COUNT(*) FROM users WHERE first_name = ? OR last_name = ? OR email = ?";
+        $result = $this->db->fetchColumn($query, [$firstName, $lastName, $email]);
 
         return ($result > 0);
     }
 
-    // Andere methoden die nodig zijn voor het registratieproces
+    // Other methods required for the registration process
 }

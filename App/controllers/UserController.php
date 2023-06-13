@@ -2,13 +2,13 @@
 
 namespace app\App\Controllers;
 
-use app\App\Models\UserModel;
+use app\App\Models\Users;
 
 class UserController {
     private $userModel;
 
     public function __construct() {
-        $this->userModel = new UserModel();
+        $this->userModel = new Users();
     }
 
     public function register() {

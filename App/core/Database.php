@@ -55,4 +55,32 @@ class Database {
             die('Error executing SQL statements: ' . $e->getMessage());
         }
     }
+
+    public function fetchColumn($query, $params = [])
+    {
+        try {
+            $statement = $this->connection->prepare($query);
+            $statement->execute($params);
+
+            return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            die('Error executing database query: ' . $e->getMessage());
+        }
+    }
+
+    public function execute($query, $values = [])
+    {
+        try {
+            $statement = $this->connection->prepare($query);
+            return $statement->execute($values);
+        } catch (PDOException $e) {
+            die('Execution failed: ' . $e->getMessage());
+        }
+    }
+
+    public function getLastInsertId()
+    {
+        return $this->connection->lastInsertId();
+    }
+
 }

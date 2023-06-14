@@ -10,6 +10,9 @@ use app\App\Models\UserModel;
 
 class AuthenticationController extends Controller
 {
+
+    public Response $response;
+
     public function register(Request $request)
     {
         $registerModel = new RegisterModel();
@@ -45,7 +48,7 @@ class AuthenticationController extends Controller
                 $_SESSION['user_id'] = $user->id;
                 $this->render('/dashboard');
             } else {
-                return $this->redirect('login', ['error' => 'Ongeldige inloggegevens']);
+                return $this->response->redirect('login', ['error' => 'Ongeldige inloggegevens']);
             }
         } else {
             return $this->render('login');

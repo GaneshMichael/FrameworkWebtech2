@@ -3,7 +3,7 @@
 namespace app\App\Models;
 use app\App\core\Database;
 
-class Users
+class UserModel
 {
     protected $db;
 

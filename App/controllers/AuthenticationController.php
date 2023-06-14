@@ -2,6 +2,7 @@
 
 namespace app\App\controllers;
 
+use app\App\core\Response;
 use app\App\core\Controller;
 use app\App\core\Request;
 use app\App\Models\RegisterModel;
@@ -34,20 +35,17 @@ class AuthenticationController extends Controller
     public function login(Request $request)
     {
         if ($request->isPost()) {
-            $username = $request->getBody('username');
+            $email = $request->getBody('email');
             $password = $request->getBody('password');
 
-            // Validatie van de ingediende gegevens
-            // ...
-
             $userModel = new UserModel();
-            $user = $userModel->findByUsername($username);
+            $user = $userModel->checkCredentials($email, $password);
 
             if ($user && password_verify($password, $user->password)) {
                 $_SESSION['user_id'] = $user->id;
-                $this->redirect('/dashboard'); // Vervang '/dashboard' met de gewenste URL
+                $this->render('/dashboard');
             } else {
-                return $this->render('login', ['error' => 'Ongeldige inloggegevens']);
+                return $this->redirect('login', ['error' => 'Ongeldige inloggegevens']);
             }
         } else {
             return $this->render('login');

@@ -96,9 +96,11 @@ class Database {
 
             return $statement->fetchColumn();
         } catch (PDOException $e) {
-            die('Error executing database query: ' . $e->getMessage());
+            die('Error exe cuting database query: ' . $e->getMessage());
         }
     }
+
+
 
     public function execute($query, $values = [])
     {
@@ -110,7 +112,20 @@ class Database {
         }
     }
 
-    public function getLastInsertId()
+
+    public function query($query, $params = [])
+    {
+        try {
+            $statement = $this->connection->prepare($query);
+            $statement->execute($params);
+
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die('Error executing database query: ' . $e->getMessage());
+        }
+
+    }
+        public function getLastInsertId()
     {
         return $this->connection->lastInsertId();
     }

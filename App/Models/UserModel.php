@@ -1,28 +1,49 @@
 <?php
-
 namespace app\App\Models;
-use app\App\core\Database;
+
 use app\App\core\Model;
+use app\App\core\Database;
 
 class UserModel extends Model
 {
-    public string $email = '';
-    public string $password = '';
-    protected $db;
+public string $email = '';
+public string $password = '';
 
-    public function __construct() {
-        $this->db = new Database();
-        $this->db->connect();
-    }
+public static function tableName(): string
+{
+return 'users';
+}
 
-    public function checkCredentials($email, $password) { // checkCredentials is a method that checks if the user exists in the database
-        $query = "SELECT * FROM users WHERE email = ?";
-        $values = [$email, $password];
-        $result = $this->db->query($query, $values);
+public function validateCredentials(): bool
+{
+$user = self::findOne(['email' => $this->email]);
 
-        if ($result && password_verify($password, $result['password'])) {
-            return $result;
-        }
-        return null;
-    }
+if ($user && password_verify($this->password, $user['password'])) {
+return true;
+}
+
+return false;
+}
+
+public static function findOne($condition)
+{
+$db = new Database();
+$db->connect();
+
+$tableName = static::tableName();
+
+$columns = implode(', ', array_keys($condition));
+$placeholders = implode(', ', array_fill(0, count($condition), '?'));
+
+$query = "SELECT * FROM $tableName WHERE $columns = $placeholders";
+$values = array_values($condition);
+
+$result = $db->query($query, $values);
+
+if ($result) {
+return $result[0];
+}
+
+return null;
+}
 }

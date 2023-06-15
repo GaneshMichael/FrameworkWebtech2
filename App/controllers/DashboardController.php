@@ -7,7 +7,6 @@ class DashboardController extends Controller
 {
     public function dashboard() {
         $params = [
-            'naam' => 'Michael'
         ];
         return $this->render('dashboard', $params);
     }

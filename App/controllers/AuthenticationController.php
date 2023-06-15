@@ -35,23 +35,33 @@ class AuthenticationController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function login(ServerRequestInterface $request, ResponseInterface $response)
     {
-        if ($request->isPost()) {
-            $email = $request->getBody('email');
-            $password = $request->getBody('password');
+        if ($request->getMethod() === 'POST') {
+            $email = $request->getParsedBody()['email'] ?? '';
+            $password = $request->getParsedBody()['password'] ?? '';
 
+            // Controleer of beide velden zijn ingevuld
+            if (empty($email) || empty($password)) {
+                // Toon een foutmelding of doorverwijzen naar de inlogpagina
+                return $response->withRedirect('/login');
+            }
+
+            // Verifieer de inloggegevens met behulp van het UserModel
             $userModel = new UserModel();
-            $user = $userModel->checkCredentials($email, $password);
+            $userModel->email = $email;
+            $userModel->password = $password;
 
-            if ($user && password_verify($password, $user->password)) {
-                $_SESSION['user_id'] = $user->id;
-                return $this->render('/dashboard');
+            if ($userModel->validateCredentials()) {
+                // Inloggen gelukt, voer de gewenste actie uit
+                return $response->withRedirect('/dashboard');
             } else {
-                return $this->response->redirect('login', ['error' => 'Ongeldige inloggegevens']);
+                // Ongeldige inloggegevens, toon een foutmelding of doorverwijzen naar de inlogpagina
+                return $response->withRedirect('/login');
             }
         } else {
-            return $this->render('login');
+            // Toon het inlogformulier
+            return $response->getBody()->write('Login Form');
         }
     }
 }

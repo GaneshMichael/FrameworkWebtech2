@@ -2,19 +2,19 @@
 
 namespace app\App\Models;
 
-class LoginModel 
+class LoginModel
 {
-    public function login($username, $password)
-    {
-        $userModel = new UserModel();
-        $user = $userModel->findByUsername($username);
+    public string $email = '';
+    public string $password = '';
 
-        if ($user && password_verify($password, $user->password)) {
-            $_SESSION['user_id'] = $user->id;
-            return true;
-        } else {
-            return false;
-        }
+    public function rules(): array
+    {
+        return [
+            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
+            'password' => [self::RULE_REQUIRED]
+        ];
     }
+
+
 
 }

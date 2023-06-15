@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
             $registerModel->loadData($request->getBody());
 
             if ($registerModel->validate() && $registerModel->register()) {
-                return $this->response->setStatusCode(200)->setContent('Success!');
+                return 'Success';
             }
 
             return $this->render('register', [
@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
 
             if ($user && password_verify($password, $user->password)) {
                 $_SESSION['user_id'] = $user->id;
-                $this->render('/dashboard');
+                return $this->render('/dashboard');
             } else {
                 return $this->response->redirect('login', ['error' => 'Ongeldige inloggegevens']);
             }

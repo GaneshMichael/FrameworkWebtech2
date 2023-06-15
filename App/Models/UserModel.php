@@ -2,9 +2,12 @@
 
 namespace app\App\Models;
 use app\App\core\Database;
+use app\App\core\Model;
 
-class UserModel
+class UserModel extends Model
 {
+    public string $email = '';
+    public string $password = '';
     protected $db;
 
     public function __construct() {
@@ -12,9 +15,9 @@ class UserModel
         $this->db->connect();
     }
 
-    public function checkCredentials($firstName, $password) { // checkCredentials is a method that checks if the user exists in the database
-        $query = "SELECT * FROM users WHERE first_name = ?";
-        $values = [$firstName];
+    public function checkCredentials($email, $password) { // checkCredentials is a method that checks if the user exists in the database
+        $query = "SELECT * FROM users WHERE email = ?";
+        $values = [$email, $password];
         $result = $this->db->query($query, $values);
 
         if ($result && password_verify($password, $result['password'])) {

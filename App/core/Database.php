@@ -24,16 +24,12 @@ class Database {
                 $key = trim($key);
                 $value = trim($value);
 
-                // Optioneel: Omring de waarde met enkele of dubbele aanhalingstekens om speciale tekens te ontsnappen
-                // $value = trim($value, "'\"");
-
                 $_ENV[$key] = $value;
             }
         }
     }
 
     public function connect() {
-        // Laden van .env bestand
         $this->loadEnv();
 
         $dsn = 'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'];

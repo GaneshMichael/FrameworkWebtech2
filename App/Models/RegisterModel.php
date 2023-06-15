@@ -6,18 +6,11 @@ use app\App\core\Database;
 
 class RegisterModel extends Model
 {
-    protected $db;
     public string $firstName = '';
     public string $lastName = '';
     public string $password = '';
     public string $email = '';
     public string $confirmPassword = '';
-
-    public function __construct()
-    {
-        $this->db = new Database();
-        $this->db->connect();
-    }
 
     public function register()
     {

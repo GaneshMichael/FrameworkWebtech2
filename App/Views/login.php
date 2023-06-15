@@ -9,6 +9,7 @@ $form = new Form();
 echo $form->begin('/login', 'post');
 ?>
 
+<h1>Login</h1>
 <div class="mb-3 row">
     <div class="mb-3 row">
         <label for="email" class="col-sm-2 col-form-label">Email</label>

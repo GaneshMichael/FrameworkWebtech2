@@ -3,7 +3,7 @@
         'name' => 'michael/framework-webtech2',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4dacc129498f624f461412ff727e7c63053136e4',
+        'reference' => '3de4cbaee07cf30bc44c24ea8c8933b168bb80cb',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'michael/framework-webtech2' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4dacc129498f624f461412ff727e7c63053136e4',
+            'reference' => '3de4cbaee07cf30bc44c24ea8c8933b168bb80cb',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

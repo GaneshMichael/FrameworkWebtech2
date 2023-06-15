@@ -2,17 +2,22 @@
 
 namespace app\App\Models;
 
-class LoginModel
+use app\App\core\Database;
+use app\App\core\Model;
+
+class LoginModel extends Model
 {
+    const RULE_REQUIRED = 'required';
     public string $email = '';
     public string $password = '';
 
-    public function rules(): array
+    public function login()
     {
-        return [
-            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
-            'password' => [self::RULE_REQUIRED]
-        ];
+        $user = $this->findOne(['email' => $this->email]);
+        if ($user && password_verify($this->password, $user['password'])) {
+            return true;
+        }
+        return false;
     }
 
 

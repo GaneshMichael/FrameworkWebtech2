@@ -56,17 +56,6 @@ class Router
 
     protected function applyAuthorizationMiddleware(): bool
     {
-        // Controleer hier of de gebruiker geautoriseerd is
-        // Implementeer de logica van je autorisatiemiddleware
-        // Retourneer true als de gebruiker geautoriseerd is, anders false
-
-        // Voorbeeldimplementatie:
-        // Als je een aparte AuthorizationMiddleware-klasse hebt, kun je deze hier aanroepen
-        // $middleware = new AuthorizationMiddleware();
-        // return $middleware->handle($this->request);
-
-        // Als je de autorisatielogica rechtstreeks in de Router wilt implementeren, kun je het hier doen
-        // Retourneer true als de gebruiker geautoriseerd is, anders false
         return true;
     }
 

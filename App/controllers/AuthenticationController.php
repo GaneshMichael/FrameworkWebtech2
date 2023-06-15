@@ -7,6 +7,7 @@ use app\App\core\Controller;
 use app\App\core\Request;
 use app\App\Models\RegisterModel;
 use app\App\Models\UserModel;
+use app\App\Models\LoginModel;
 
 class AuthenticationController extends Controller
 {
@@ -34,35 +35,27 @@ class AuthenticationController extends Controller
             'model' => $registerModel
         ]);
     }
-
-    public function login(ServerRequestInterface $request, ResponseInterface $response)
+    public function login(Request $request)
     {
-        if ($request->getMethod() === 'POST') {
-            $email = $request->getParsedBody()['email'] ?? '';
-            $password = $request->getParsedBody()['password'] ?? '';
+        $loginModel = new LoginModel();
 
-            // Controleer of beide velden zijn ingevuld
-            if (empty($email) || empty($password)) {
-                // Toon een foutmelding of doorverwijzen naar de inlogpagina
-                return $response->withRedirect('/login');
+        if ($request->isPost()) {
+            $loginModel->loadData($request->getBody());
+
+            if ($loginModel->validate() && $loginModel->login()) {
+                return 'Success';
             }
 
-            // Verifieer de inloggegevens met behulp van het UserModel
-            $userModel = new UserModel();
-            $userModel->email = $email;
-            $userModel->password = $password;
-
-            if ($userModel->validateCredentials()) {
-                // Inloggen gelukt, voer de gewenste actie uit
-                return $response->withRedirect('/dashboard');
-            } else {
-                // Ongeldige inloggegevens, toon een foutmelding of doorverwijzen naar de inlogpagina
-                return $response->withRedirect('/login');
-            }
-        } else {
-            // Toon het inlogformulier
-            return $response->getBody()->write('Login Form');
+            return $this->render('login', [
+                'model' => $loginModel
+            ]);
         }
+
+        $this->chooseLayout('authentication');
+        return $this->render('login', [
+            'model' => $loginModel
+        ]);
     }
+
 }
 

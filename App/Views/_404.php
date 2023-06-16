@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>404</title>
+    <h1>An error occured</h1>
     {{css}}
 </head>
 <body>

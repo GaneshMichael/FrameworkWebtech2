@@ -37,25 +37,19 @@ class AuthenticationController extends Controller
     }
     public function login(Request $request)
     {
-        $loginModel = new LoginModel();
+        $userModel = new UserModel();
 
         if ($request->isPost()) {
-            $loginModel->loadData($request->getBody());
+            $userModel->loadData($request->getBody());
 
-            if ($loginModel->validate() && $loginModel->login()) {
+            if ($userModel->validateCredentials()) {
                 return 'Success';
             }
 
             return $this->render('login', [
-                'model' => $loginModel
+                'model' => $userModel
             ]);
         }
-
-        $this->chooseLayout('authentication');
-        return $this->render('login', [
-            'model' => $loginModel
-        ]);
     }
-
 }
 

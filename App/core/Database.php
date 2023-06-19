@@ -7,6 +7,7 @@ use PDOException;
 
 class Database {
     private $connection;
+    
 
     private function loadEnv()
     {
@@ -112,15 +113,15 @@ class Database {
     public function query($query, $params = [])
     {
         try {
-            $statement = $this->connection->prepare($query);
+            $statement = $this->prepare($query);
             $statement->execute($params);
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             die('Error executing database query: ' . $e->getMessage());
         }
-
     }
+
         public function getLastInsertId()
     {
         return $this->connection->lastInsertId();

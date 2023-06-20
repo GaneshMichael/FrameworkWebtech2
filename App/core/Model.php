@@ -8,7 +8,40 @@ class Model
 
     public function validate(): bool
     {
-        return empty($this->errors);
+        $isValid = true;
+
+        if (empty($this->firstName)) {
+            $this->addError('firstName', 'First name is required.');
+            $isValid = false;
+        }
+
+        if (empty($this->lastName)) {
+            $this->addError('lastName', 'Last name is required.');
+            $isValid = false;
+        }
+
+        if (empty($this->email)) {
+            $this->addError('email', 'Email is required.');
+            $isValid = false;
+        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $this->addError('email', 'Invalid email format.');
+            $isValid = false;
+        }
+
+        if (empty($this->password)) {
+            $this->addError('password', 'Password is required.');
+            $isValid = false;
+        }
+
+        if (empty($this->confirmPassword)) {
+            $this->addError('confirmPassword', 'Confirm password is required.');
+            $isValid = false;
+        } elseif ($this->password !== $this->confirmPassword) {
+            $this->addError('confirmPassword', 'Passwords do not match.');
+            $isValid = false;
+        }
+
+        return $isValid;
     }
 
     public function addError($attribute, $message): void

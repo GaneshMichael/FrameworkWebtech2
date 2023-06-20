@@ -2,6 +2,7 @@
 
 namespace app\App\controllers;
 
+use app\App\core\App;
 use app\App\core\Controller;
 use app\App\core\Request;
 use app\App\Models\RegisterModel;
@@ -38,21 +39,26 @@ class AuthenticationController extends Controller
             $userModel->loadData($request->getBody());
 
             if ($userModel->validateCredentials()) {
-                echo 'Success';
-                return $this->render('home');
-
+                App::$app->setUser($userModel);
+                return $this->render('/home');
             }
+
+            $this->chooseLayout('authentication');
+            return $this->render('login', [
+                'model' => $userModel
+            ]);
+        } else {
             $this->chooseLayout('authentication');
             return $this->render('login', [
                 'model' => $userModel
             ]);
         }
-        else {
-            $this->chooseLayout('authentication');
-            return $this->render('login', [
-                'model' => $userModel
-            ]);
-        }
+    }
+    public function logout(Request $request)
+    {
+        $userModel = new UserModel();
+        $userModel->logout();
+        return $this->render('/login');
     }
 }
 

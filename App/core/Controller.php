@@ -12,4 +12,11 @@ class Controller
     public function render($view, $params = []) {
         return App::$app->router->renderView($view, $params);
     }
+
+    public function redirect(string $url)
+    {
+        header('Location: ' . $url);
+        exit;
+    }
+
 }

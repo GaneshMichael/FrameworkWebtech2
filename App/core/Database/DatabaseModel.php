@@ -71,7 +71,6 @@ class DatabaseModel extends Model
         }
 
         $query = rtrim($query, "AND ");
-        var_dump($query);
 
         $statement = self::$connection->prepare($query);
         $statement->execute($params);

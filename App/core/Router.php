@@ -35,7 +35,6 @@ class Router
             return $this->renderView("_404");
         }
 
-
         $authorized = $this->applyAuthorizationMiddleware();
         if (!$authorized) {
             $this->response->setStatusCode(401);
@@ -43,7 +42,9 @@ class Router
         }
 
         if (is_array($callback)) {
-            App::$app->controller = new $callback[0];
+            if (!isset(App::$app->controller)) {
+                App::$app->controller = new $callback[0];
+            }
             $callback[0] = App::$app->controller;
         }
 

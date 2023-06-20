@@ -6,7 +6,7 @@ use app\App\Models\UserModel;
 $model = new UserModel();
 
 $form = new Form();
-echo $form->begin('/login', 'post');
+echo $form->begin('login', 'post');
 ?>
 
 <h1>Login</h1>

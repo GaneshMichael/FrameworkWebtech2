@@ -7,30 +7,5 @@ use app\App\core\Model;
 
 class LoginModel extends Model
 {
-    const RULE_REQUIRED = 'required';
-    public string $email = '';
-    public string $password = '';
-
-    public function login()
-    {
-        $user = $this->findOne(['email' => $this->email]);
-        if ($user && password_verify($this->password, $user['password'])) {
-            return true;
-        }
-        return false;
-    }
-
-    public function validateCredentials(): bool
-    {
-        $user = self::findOne(['email' => $this->email]);
-
-        if ($user && password_verify($this->password, $user['password'])) {
-            return true;
-        }
-
-        return false;
-    }
-
-
 
 }

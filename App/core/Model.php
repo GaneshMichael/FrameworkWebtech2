@@ -2,29 +2,9 @@
 
 namespace app\App\core;
 
-use app\App\core\Database\DatabaseModel;
-
-
 class Model
 {
-    protected Database $db;
-    public array $attributes = [];
     public array $errors = [];
-
-    public function __construct()
-    {
-        $db = new DatabaseModel();
-        $db->connect();
-    }
-
-    public function loadData($data): void
-    {
-        foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->{$key} = $value;
-            }
-        }
-    }
 
     public function validate(): bool
     {
@@ -45,24 +25,10 @@ class Model
     {
         return $this->errors[$attribute][0] ?? null;
     }
-    public static function findOne(array $conditions): ?array
-    {
-        $tableName = static::tableName();
-        $query = "SELECT * FROM $tableName WHERE ";
-        $params = [];
 
-        foreach ($conditions as $column => $value) {
-            $query .= "$column = ? AND ";
-            $params[] = $value;
-        }
-
-        $query = rtrim($query, "AND ");
-        $db = new Database();
-        return $db->query($query, $params)[0] ?? null;
-    }
     public static function tableName(): string
     {
-        return '';
+        return 'users';
     }
 
 

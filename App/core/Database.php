@@ -6,8 +6,29 @@ use PDO;
 use PDOException;
 
 class Database {
-    private $connection;
 
+    public PDO $pdo;
+
+    public function __construct()
+    {
+        $this->loadEnv();
+        $host = $_ENV['DB_HOST'];
+        $db = $_ENV['DB_NAME'];
+        $user = $_ENV['DB_USERNAME'];
+        $password = $_ENV['DB_PASSWORD'];
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ];
+
+        try {
+            $this->pdo = new PDO($dsn, $user, $password, $options);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
     public function loadEnv()
     {
         $envFile = __DIR__ . '/../../.env';
@@ -27,55 +48,5 @@ class Database {
                 $_ENV[$key] = $value;
             }
         }
-    }
-
-    public function executeStatements($sqlStatements) {
-        try {
-            $this->connection->exec($sqlStatements);
-        } catch (PDOException $e) {
-            die('Error executing SQL statements: ' . $e->getMessage());
-        }
-    }
-
-    public function fetchColumn($query, $params = [])
-    {
-        try {
-            $statement = $this->connection->prepare($query);
-            $statement->execute($params);
-
-            return $statement->fetchColumn();
-        } catch (PDOException $e) {
-            die('Error exe cuting database query: ' . $e->getMessage());
-        }
-    }
-
-
-
-    public function execute($query, $values = [])
-    {
-        try {
-            $statement = $this->connection->prepare($query);
-            return $statement->execute($values);
-        } catch (PDOException $e) {
-            die('Execution failed: ' . $e->getMessage());
-        }
-    }
-
-
-    public function query($query, $params = [])
-    {
-        try {
-            $statement = $this->connection->prepare($query);
-            $statement->execute($params);
-
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            die('Error executing database query: ' . $e->getMessage());
-        }
-    }
-
-        public function getLastInsertId()
-    {
-        return $this->connection->lastInsertId();
     }
 }

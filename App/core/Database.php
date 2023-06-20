@@ -7,9 +7,8 @@ use PDOException;
 
 class Database {
     private $connection;
-    
 
-    private function loadEnv()
+    public function loadEnv()
     {
         $envFile = __DIR__ . '/../../.env';
 
@@ -27,53 +26,6 @@ class Database {
 
                 $_ENV[$key] = $value;
             }
-        }
-    }
-
-    public function connect() {
-        $this->loadEnv();
-
-        $dsn = 'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'];
-        $username = $_ENV['DB_USERNAME'];
-        $password = $_ENV['DB_PASSWORD'];
-
-        try {
-            $this->connection = new PDO($dsn, $username, $password);
-
-        } catch (PDOException $e) {
-            die('Database connection failed: ' . $e->getMessage());
-        }
-    }
-
-    public function count($table, $condition = '', $params = [])
-    {
-        try {
-            $sql = "SELECT COUNT(*) FROM $table";
-            if (!empty($condition)) {
-                $sql .= " WHERE $condition";
-            }
-
-            $statement = $this->connection->prepare($sql);
-            $statement->execute($params);
-
-            return $statement->fetchColumn();
-        } catch (PDOException $e) {
-            die('Error executing database query: ' . $e->getMessage());
-        }
-    }
-    public function insert($table, $columns, $values)
-    {
-        try {
-            $columnString = implode(', ', $columns);
-            $valuePlaceholder = implode(', ', array_fill(0, count($values), '?'));
-
-            $sql = "INSERT INTO $table ($columnString) VALUES ($valuePlaceholder)";
-            $statement = $this->connection->prepare($sql);
-            $statement->execute($values);
-
-            return $this->getLastInsertId();
-        } catch (PDOException $e) {
-            die('Execution failed: ' . $e->getMessage());
         }
     }
 
@@ -113,7 +65,7 @@ class Database {
     public function query($query, $params = [])
     {
         try {
-            $statement = $this->prepare($query);
+            $statement = $this->connection->prepare($query);
             $statement->execute($params);
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -126,14 +78,4 @@ class Database {
     {
         return $this->connection->lastInsertId();
     }
-
-    public function prepare($query)
-    {
-        try {
-            return $this->connection->prepare($query);
-        } catch (PDOException $e) {
-            die('Error preparing database query: ' . $e->getMessage());
-        }
-    }
-
 }

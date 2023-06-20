@@ -2,7 +2,7 @@
 namespace app\App\Models;
 
 use app\App\core\Model;
-use app\App\core\Database;
+use app\App\core\Database\DatabaseModel;
 
 class RegisterModel extends Model
 {
@@ -23,7 +23,7 @@ class RegisterModel extends Model
         $columns = ['first_name', 'last_name', 'password', 'email'];
         $values = [$this->firstName, $this->lastName, $passwordHash, $this->email];
 
-        $result = $this->db->insert('users', $columns, $values);
+        $result = (new \app\App\core\Database\DatabaseModel)->insert('users', $columns, $values);
 
         if ($result) {
             return $result;
@@ -82,7 +82,7 @@ class RegisterModel extends Model
             'email' => $email
         ];
 
-        $result = $this->db->count('users', $condition, $params);
+        $result = DatabaseModel::count('users', $condition, $params);
 
         return ($result > 0);
     }

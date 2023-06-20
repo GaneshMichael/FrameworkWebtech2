@@ -11,9 +11,6 @@ use app\App\Models\LoginModel;
 
 class AuthenticationController extends Controller
 {
-
-    public Response $response;
-
     public function register(Request $request)
     {
         $registerModel = new RegisterModel();

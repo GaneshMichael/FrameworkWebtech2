@@ -20,6 +20,17 @@ class LoginModel extends Model
         return false;
     }
 
+    public function validateCredentials(): bool
+    {
+        $user = self::findOne(['email' => $this->email]);
+
+        if ($user && password_verify($this->password, $user['password'])) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 
 }

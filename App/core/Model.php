@@ -2,6 +2,9 @@
 
 namespace app\App\core;
 
+use app\App\core\Database\DatabaseModel;
+
+
 class Model
 {
     protected Database $db;
@@ -10,7 +13,7 @@ class Model
 
     public function __construct()
     {
-        $db = new Database();
+        $db = new DatabaseModel();
         $db->connect();
     }
 

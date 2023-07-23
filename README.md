@@ -13,7 +13,7 @@ Een simpele php framework voor webtech 2
 2. Run `composer install`
 3. Run `php -S localhost:8080`
 4. Open `localhost:8080` in je browser
-5. Done!
+5. Done
 
 ## Usage <a name="usage"></a>
 | Userid | Email                    | Role    |
